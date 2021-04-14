@@ -8,4 +8,8 @@
   - DB_USERNAME="change it to your username"
   - DB_PASSWORD="change it to your password"
   - DB_DATABASE="change it to your db"
+
+  change all the properties without quotations.
+  
+- npm run start:dev
 - enjoy it
