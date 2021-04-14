@@ -4,6 +4,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import * as Joi from 'joi';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -15,7 +18,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
         DB_USERNAME: Joi.string().required(),
         DB_PASSWORD: Joi.string().required(),
         DB_DATABASE: Joi.string().required(),
-        PRIVATE_KEY: Joi.string().required(),
       }),
     }),
     TypeOrmModule.forRoot({
@@ -27,8 +29,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       database: process.env.DB_DATABASE,
       synchronize: process.env.NODE_ENV !== 'prod',
       logging: true,
-      entities: [],
+      autoLoadEntities: true,
     }),
+    UsersModule,
+    AuthModule,
+    CommonModule,
   ],
   controllers: [AppController],
   providers: [AppService],
